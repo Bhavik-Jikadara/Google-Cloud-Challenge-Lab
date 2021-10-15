@@ -2,13 +2,13 @@
 Insights from Data with BigQuery: Challenge Lab
 
 
-Query 1: Total Confirmed Cases
+## Query 1: Total Confirmed Cases
 
 `
 SELECT sum(cumulative_confirmed) as total_cases_worldwide FROM `bigquery-public-data.covid19_open_data.covid19_open_data` where date='2020-04-15'
 `
 
-Query 2: Worst Affected Areas
+## Query 2: Worst Affected Areas
 
 `
 with deaths_by_states as (
@@ -23,7 +23,7 @@ from deaths_by_states
 where death_count > 100
 `
 
-Query 3: Identifying Hotspots
+## Query 3: Identifying Hotspots
 
 `
 SELECT * FROM (
@@ -34,7 +34,7 @@ GROUP BY subregion1_name
 ORDER BY total_confirmed_cases DESC ) WHERE total_confirmed_cases > 1000  
 `
 
-Query 4: Fatality Ratio
+## Query 4: Fatality Ratio
 
 `
 SELECT sum(cumulative_confirmed) as total_confirmed_cases, sum(cumulative_deceased) as total_deaths, (sum(cumulative_deceased)/sum(cumulative_confirmed))*100 as case_fatality_ratio 
@@ -42,7 +42,7 @@ FROM `bigquery-public-data.covid19_open_data.covid19_open_data`
 where country_name="Italy" AND date BETWEEN '2020-04-01'and '2020-04-30'
 `
 
-Query 5: Identifying specific day
+## Query 5: Identifying specific day
 
 `
 SELECT date
@@ -52,7 +52,7 @@ order by date asc
 limit 1
 `
 
-Query 6: Finding days with zero net new cases
+## Query 6: Finding days with zero net new cases
 
 `
 WITH india_cases_by_date AS (
@@ -84,7 +84,7 @@ from india_previous_day_comparison
 where net_new_cases=0
 `
 
-Query 7: Doubling rate
+## Query 7: Doubling rate
 
 `
 WITH us_cases_by_date AS (
@@ -117,7 +117,7 @@ from us_previous_day_comparison
 where percentage_increase > 10
 `
 
-Query 8: Recovery rate
+## Query 8: Recovery rate
 
 `
 WITH cases_by_country AS (
@@ -147,7 +147,7 @@ ORDER BY recovery_rate desc
 LIMIT 10
 `
 
-Query 9: CDGR - Cumulative Daily Growth Rate
+## Query 9: CDGR - Cumulative Daily Growth Rate
 
 `
 WITH
