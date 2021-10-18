@@ -1,5 +1,5 @@
 ======================TASK 1===========================
-
+`
 CREATE OR REPLACE TABLE
   taxirides.taxi_training_data AS
 SELECT
@@ -25,10 +25,10 @@ WHERE
   AND dropoff_latitude > 37
   AND dropoff_latitude < 45
   AND passenger_count > 0
-
+`
 
 =========================TASK 2==============================
-
+`
 CREATE OR REPLACE MODEL taxirides.fare_model
 TRANSFORM(
   * EXCEPT(pickup_datetime)
@@ -41,14 +41,14 @@ OPTIONS(input_label_cols=['fare_amount'], model_type='linear_reg')
 AS
 
 SELECT * FROM taxirides.taxi_training_data
-
+`
 
 ========================TASK 3================================
-
+`
 CREATE OR REPLACE TABLE taxirides.2015_fare_amount_predictions
   AS
 SELECT * FROM ML.PREDICT(MODEL taxirides.fare_model,(
   SELECT * FROM taxirides.report_prediction_data)
 )
-
+`
 ///////////////////////////THE END\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
